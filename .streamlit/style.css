@@ -1,0 +1,128 @@
+/* Scoped presentation styling for the dashboard's named containers. */
+
+.st-key-hero-card {
+    padding: 1.5rem 1.75rem;
+    border: 0 !important;
+    border-radius: 1.1rem !important;
+    background:
+        radial-gradient(circle at 88% 8%, rgb(45 212 191 / 24%), transparent 28%),
+        linear-gradient(118deg, #102a43 0%, #123e57 56%, #0e7490 100%);
+    box-shadow: 0 16px 36px rgb(15 35 55 / 15%);
+}
+
+.st-key-hero-card h1,
+.st-key-hero-card [data-testid="stMarkdownContainer"] p {
+    color: #f8fbff !important;
+}
+
+.st-key-hero-card h1 {
+    letter-spacing: -0.035em;
+    margin-top: 0.4rem;
+    margin-bottom: 0.25rem;
+}
+
+.st-key-hero-card [data-testid="stCaptionContainer"] {
+    color: #d2e3ee !important;
+}
+
+.st-key-overview-kpis [data-testid="stMetric"],
+.st-key-evaluation-kpis [data-testid="stMetric"],
+.st-key-forecast-kpis [data-testid="stMetric"] {
+    min-height: 7.25rem;
+    padding: 1.05rem 1.1rem;
+    border: 1px solid #dce7ef;
+    border-radius: 0.9rem;
+    background: linear-gradient(160deg, #ffffff 0%, #f9fbfd 100%);
+    box-shadow: 0 5px 16px rgb(24 48 72 / 5%);
+}
+
+.st-key-overview-kpis [data-testid="stMetricLabel"],
+.st-key-evaluation-kpis [data-testid="stMetricLabel"],
+.st-key-forecast-kpis [data-testid="stMetricLabel"] {
+    color: #597086;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.st-key-overview-kpis [data-testid="stMetricValue"],
+.st-key-evaluation-kpis [data-testid="stMetricValue"],
+.st-key-forecast-kpis [data-testid="stMetricValue"] {
+    color: #123e57;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.st-key-demand-trend-card,
+.st-key-period-summary-card,
+.st-key-actual-predicted-card,
+.st-key-feature-importance-card,
+.st-key-seasonal-forecast-card,
+.st-key-forecast-schedule-card {
+    border-color: #dce7ef !important;
+    border-radius: 1rem !important;
+    background-color: #ffffff;
+    box-shadow: 0 6px 20px rgb(24 48 72 / 4%);
+    padding: 1rem 1.15rem;
+}
+
+.st-key-demand-trend-card h3,
+.st-key-period-summary-card h3,
+.st-key-actual-predicted-card h3,
+.st-key-feature-importance-card h3,
+.st-key-seasonal-forecast-card h3,
+.st-key-forecast-schedule-card h3 {
+    letter-spacing: -0.02em;
+}
+
+.st-key-filter-form {
+    padding: 0.85rem;
+    border: 1px solid #dce7ef;
+    border-radius: 0.9rem;
+    background: #ffffff;
+}
+
+.st-key-filter-form button[kind="primaryFormSubmit"] {
+    background: linear-gradient(105deg, #0e7490 0%, #155e75 100%);
+    border: 0;
+    box-shadow: 0 5px 12px rgb(14 116 144 / 18%);
+    font-weight: 650;
+}
+
+section[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #f0f6fa 0%, #f7f9fc 55%, #f7f9fc 100%);
+}
+
+section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h2 {
+    letter-spacing: -0.035em;
+}
+
+section[data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
+    color: #62788d;
+}
+
+[data-testid="stMainBlockContainer"] {
+    padding-top: 2.2rem;
+    padding-bottom: 3rem;
+}
+
+[data-testid="stMainBlockContainer"] h2,
+[data-testid="stMainBlockContainer"] h3 {
+    letter-spacing: -0.025em;
+}
+
+@media (max-width: 760px) {
+    .st-key-hero-card {
+        padding: 1.1rem 1.15rem;
+    }
+
+    .st-key-overview-kpis [data-testid="stMetric"],
+    .st-key-evaluation-kpis [data-testid="stMetric"],
+    .st-key-forecast-kpis [data-testid="stMetric"] {
+        min-height: 6.4rem;
+        padding: 0.8rem;
+    }
+
+    [data-testid="stMainBlockContainer"] {
+        padding-top: 1.25rem;
+    }
+}

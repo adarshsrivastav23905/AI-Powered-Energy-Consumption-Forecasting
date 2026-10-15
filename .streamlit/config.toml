@@ -1,0 +1,18 @@
+[theme]
+base = "light"
+primaryColor = "#0E7490"
+backgroundColor = "#F7F9FC"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#172B4D"
+font = "sans-serif"
+baseFontSize = 15
+headingFontSizes = ["34px", "26px", "20px", "17px", "15px", "13px"]
+headingFontWeights = [700, 650, 600, 600, 500, 500]
+baseRadius = "medium"
+buttonRadius = "medium"
+showWidgetBorder = true
+showSidebarBorder = true
+linkColor = "#0E7490"
+borderColor = "#DCE4EE"
+dataframeHeaderBackgroundColor = "#EEF3F8"
+chartCategoricalColors = ["#0E7490", "#1D4ED8", "#14B8A6", "#F59E0B", "#7C3AED", "#475569"]

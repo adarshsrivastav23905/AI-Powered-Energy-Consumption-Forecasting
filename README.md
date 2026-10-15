@@ -223,7 +223,10 @@ It provides a simple UI to view:
 - performance metrics
 - actual vs predicted trend
 - feature importance chart
-- business summary
+- historical demand and model forecast views
+- date/model/horizon filters with an apply action
+- a responsive KPI layout and a coordinated light theme configured in `.streamlit/config.toml`
+- scoped premium styling for the hero, metric cards, filter panel, and chart surfaces in `.streamlit/style.css`
 
 ## GitHub Portfolio Value
 
