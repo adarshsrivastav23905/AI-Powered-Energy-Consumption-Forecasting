@@ -51,6 +51,7 @@ The system helps organizations:
 - Scikit-learn
 - RandomForestRegressor
 - Streamlit
+- Flask
 - Jupyter Notebook
 
 ## Project Architecture
@@ -95,6 +96,7 @@ AI-Energy-Forecasting/
 │   └── feature_importance.png
 ├── src/
 │   ├── __init__.py
+│   ├── api_model.py
 │   ├── data_generator.py
 │   ├── data_loader.py
 │   ├── features.py
@@ -103,6 +105,8 @@ AI-Energy-Forecasting/
 │   └── visualization.py
 ├── .gitignore
 ├── main.py
+├── api.py
+├── train_api_model.py
 ├── README.md
 ├── requirements.txt
 ├── streamlit_app.py
@@ -120,6 +124,8 @@ AI-Energy-Forecasting/
 - Model evaluation with MAE, RMSE, and R²
 - Plot generation for actual vs predicted energy usage
 - Streamlit dashboard with time filters and forecast horizon controls
+- Flask prediction API with validated JSON inputs
+- Separately trained MLP baseline for the API's hour/day prediction contract
 - Notebook version for educational use
 - GitHub-ready demo asset generation script for screenshots and visuals
 
@@ -153,6 +159,36 @@ python main.py
 ```bash
 streamlit run streamlit_app.py
 ```
+
+### Flask prediction API
+
+The API uses a separate, small MLP model with `hour` and weekday (`day`) as inputs. Train and save that model first:
+
+```bash
+python train_api_model.py
+python api.py
+```
+
+On Windows PowerShell, send a request to `http://127.0.0.1:5000/predict`:
+
+```powershell
+Invoke-RestMethod -Uri http://127.0.0.1:5000/predict -Method Post `
+  -ContentType "application/json" -Body '{"hour":14,"day":2}'
+```
+
+On Mac/Linux, use curl:
+
+```bash
+curl -X POST http://127.0.0.1:5000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"hour":14,"day":2}'
+```
+
+The API validates both inputs and returns `predicted_energy_kwh`. It is a local demo API, not a production service.
+
+Project interview preparation is in [docs/interview_qa.md](docs/interview_qa.md).
+
+The serialized API model is generated locally and excluded from Git. Run `python train_api_model.py` after cloning to create it.
 
 ## Example Result
 
@@ -206,7 +242,7 @@ Possible next extensions:
 - LSTM or GRU deep learning model
 - weather-aware demand forecasting
 - real CSV dataset integration
-- deployment as a web application
+- production hardening of the local Flask API
 - cloud-hosted dashboard
 
 ## Advanced Forecasting Option

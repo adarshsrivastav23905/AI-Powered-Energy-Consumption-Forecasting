@@ -33,6 +33,7 @@ The forecasting system supports:
 - Time-based and lag-based feature engineering
 - Random Forest forecasting model for demand prediction
 - SARIMA seasonal forecasting alternative
+- Flask `/predict` API backed by a separately trained hour/weekday MLP baseline
 - Streamlit dashboard for interactive exploration
 - Summary metrics: MAE, RMSE, and R²
 - Portfolio-ready visuals and documentation
@@ -91,6 +92,19 @@ Run:
 streamlit run streamlit_app.py
 ```
 
+## Prediction API
+
+Train the API's small MLP baseline and start the local Flask service:
+
+```bash
+python train_api_model.py
+python api.py
+```
+
+It accepts `hour` (0–23) and `day` (0–6, Monday–Sunday) at `POST /predict`. The API model is intentionally separate from the Random Forest model and uses fewer inputs, so treat it as a demonstration endpoint rather than the project's most informative forecasting model.
+
+Interview Q&A and limitations are documented in [docs/interview_qa.md](docs/interview_qa.md).
+
 ## Folder Structure
 
 ```text
@@ -102,6 +116,8 @@ AI-Energy-Forecasting/
 ├── outputs/
 ├── scripts/
 ├── src/
+├── api.py
+├── train_api_model.py
 ├── README.md
 ├── PORTFOLIO.md
 ├── main.py
@@ -119,6 +135,7 @@ AI-Energy-Forecasting/
 - Scikit-learn
 - Statsmodels
 - Streamlit
+- Flask
 
 ## How to Run
 
