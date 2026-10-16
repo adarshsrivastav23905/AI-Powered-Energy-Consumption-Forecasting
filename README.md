@@ -1,244 +1,172 @@
-# AI-Powered Energy Consumption Forecasting System
+# ⚡ AI-Powered Energy Consumption Forecasting
 
-A practical machine learning project for forecasting electricity usage in homes, buildings, campuses, and small industrial systems using synthetic but realistic energy data.
+> An end-to-end Python project for exploring and forecasting hourly electricity demand with synthetic smart-grid data, Random Forest and SARIMA models, an interactive Streamlit dashboard, and a Flask prediction API.
 
-## Project Overview
+---
 
-This project simulates a real-world smart-grid and energy optimization use case. It helps answer a common operational question in energy management:
+## 👨‍💻 Author
 
-> How much electricity will be consumed in the next hour, day, or week?
+**Adarsh Srivastav**<br>
+Computer Science and Engineering (CSE) Student<br>
+Machine Learning | Python | Energy Analytics
 
-By forecasting demand, cities, buildings, and power operations can reduce waste, manage peak loads, lower energy bills, and improve sustainability.
+---
 
-## Why This Project Matters
+## 📌 Project Overview
 
-Modern electricity systems need to balance supply and demand continuously. If demand is underestimated, there may be outages or instability. If demand is overestimated, utilities and organizations may waste generation capacity and money.
+This project demonstrates an energy-demand forecasting workflow for homes, buildings, campuses, and small industrial settings. It generates or loads hourly synthetic energy data, prepares time-based features, trains forecasting models, evaluates predictions, and presents the results in a dashboard.
 
-This project addresses that through a data-driven approach.
+The project includes two forecasting approaches:
 
-## Problem Statement
+- **Random Forest** for feature-based demand prediction and holdout evaluation.
+- **SARIMA** for seasonal hourly time-series forecasting.
 
-Energy demand is often difficult to predict because it changes with:
-- time of day
-- day of week
-- weather conditions
-- occupancy and usage behavior
-- seasonal patterns
-- industrial or commercial activity
+A Streamlit dashboard provides historical demand summaries, model evaluation, future forecasts, and selected-data download. A separate Flask API demonstrates a small MLP prediction model using hour and weekday inputs.
 
-Without forecasting, organizations struggle with:
-- unexpected electricity spikes
-- excessive power cost during peak periods
-- inefficient operation of HVAC and equipment
-- unstable grid planning
-- poor renewable energy scheduling
+> **Project note:** The included dataset is synthetic. This project is a learning and decision-support demo, not a live grid-operations system.
 
-## Business Value
+---
 
-The system helps organizations:
-- plan supply and demand more effectively
-- reduce peak-time electricity costs
-- identify wasteful consumption patterns
-- improve smart-city energy management
-- support sustainability goals and carbon reduction
+## 🎯 Objectives
 
-## Tech Stack
+- Generate or load hourly energy-consumption data.
+- Clean and sort observations by timestamp.
+- Create calendar, lag, and rolling-window features.
+- Train and evaluate a Random Forest regression model.
+- Provide a seasonal SARIMA forecasting option.
+- Visualize historical demand and prediction results.
+- Explore model metrics and forecasts through a Streamlit dashboard.
+- Demonstrate validated JSON predictions using a Flask API.
+- Keep the workflow reproducible with automated tests and documentation.
 
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- Scikit-learn
-- RandomForestRegressor
-- Streamlit
-- Flask
-- Jupyter Notebook
+---
 
-## Project Architecture
+## ✨ Key Features
 
-```text
-Raw energy data
-      |
-      v
-Data cleaning and validation
-      |
-      v
-Feature engineering (hour, weekday, lag, rolling, occupancy)
-      |
-      v
-Train-test split
-      |
-      v
-Random Forest regression model
-      |
-      v
-Prediction and evaluation
-      |
-      v
-Visualization and business insight
-```
+- Synthetic hourly energy dataset generation
+- Data cleaning, sorting, and missing-value handling
+- Calendar, lag, and rolling demand features
+- Random Forest training with MAE, RMSE, and R² evaluation
+- SARIMA forecasting with a 24-hour seasonal period
+- Streamlit dashboard with date, model, and forecast-horizon controls
+- Interactive demand, evaluation, feature-importance, and forecast charts
+- Source-data preview and CSV download
+- Flask API with input validation for hour and weekday
+- Pytest suite covering API validation and data preparation
+- Educational forecasting and LSTM notebooks
 
-## Folder Structure
+---
+
+## 🏗️ System Architecture
 
 ```text
-AI-Energy-Forecasting/
-├── data/
-│   └── synthetic_energy_data.csv
-├── docs/
-│   └── architecture.md
-├── images/
-├── models/
-│   └── random_forest_energy_model.pkl
-├── notebooks/
-│   └── energy_forecasting_demo.ipynb
-├── outputs/
-│   ├── actual_vs_predicted.png
-│   └── feature_importance.png
-├── src/
-│   ├── __init__.py
-│   ├── api_model.py
-│   ├── data_generator.py
-│   ├── data_loader.py
-│   ├── features.py
-│   ├── modeling.py
-│   ├── preprocessing.py
-│   └── visualization.py
-├── .gitignore
-├── main.py
-├── api.py
-├── train_api_model.py
-├── README.md
-├── requirements.txt
-├── streamlit_app.py
-└── .venv/
+Synthetic or stored hourly energy data
+                  │
+                  ▼
+       Load, clean, sort timestamps
+                  │
+                  ▼
+ Calendar + lag + rolling feature engineering
+                  │
+          ┌───────┴────────┐
+          ▼                ▼
+ Random Forest           SARIMA
+ holdout evaluation      seasonal forecast
+          │                │
+          └───────┬────────┘
+                  ▼
+       Metrics and visualizations
+                  │
+         ┌────────┴─────────┐
+         ▼                  ▼
+ Streamlit dashboard   Flask demo API
 ```
 
-## Features Included
+---
 
-- Synthetic energy dataset generation
-- Hourly time-series data simulation
-- Data cleaning and preprocessing
-- Feature engineering with lag and rolling features
-- Machine learning forecast model
-- SARIMA time-series forecasting option for seasonal demand trends
-- Model evaluation with MAE, RMSE, and R²
-- Plot generation for actual vs predicted energy usage
-- Streamlit dashboard with time filters and forecast horizon controls
-- Flask prediction API with validated JSON inputs
-- Separately trained MLP baseline for the API's hour/day prediction contract
-- Notebook version for educational use
-- GitHub-ready demo asset generation script for screenshots and visuals
+## 🔄 Working Principle
 
-## Installation
+The main training workflow is:
 
-### 1. Create a virtual environment
-
-Windows:
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-```
-
-Mac/Linux:
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-### 2. Install dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Run the project
-```bash
-python main.py
-```
-
-### 4. Launch the dashboard
-```bash
-streamlit run streamlit_app.py
-```
-
-### Run tests
-
-Install project dependencies, then run the automated tests from the repository root:
-
-```bash
-python -m pytest -v
-```
-
-### Flask prediction API
-
-The API uses a separate, small MLP model with `hour` and weekday (`day`) as inputs. Train and save that model first:
-
-```bash
-python train_api_model.py
-python api.py
-```
-
-On Windows PowerShell, send a request to `http://127.0.0.1:5000/predict`:
-
-```powershell
-Invoke-RestMethod -Uri http://127.0.0.1:5000/predict -Method Post `
-  -ContentType "application/json" -Body '{"hour":14,"day":2}'
-```
-
-On Mac/Linux, use curl:
-
-```bash
-curl -X POST http://127.0.0.1:5000/predict \
-  -H "Content-Type: application/json" \
-  -d '{"hour":14,"day":2}'
-```
-
-The API validates both inputs and returns `predicted_energy_kwh`. It is a local demo API, not a production service.
-
-Project interview preparation is in [docs/interview_qa.md](docs/interview_qa.md).
-
-The serialized API model is generated locally and excluded from Git. Run `python train_api_model.py` after cloning to create it.
-
-## Example Result
-
-This project has been validated with the current pipeline and produces strong predictive performance on synthetic smart-grid data.
-
-Example output:
 ```text
-Forecasting system completed successfully.
-MAE: 9.50
-RMSE: 12.12
-R2 Score: 0.9775
+Read or generate energy data
+          ↓
+Clean values and sort by timestamp
+          ↓
+Create calendar, lag, and rolling features
+          ↓
+Split data for model evaluation
+          ↓
+Train Random Forest model
+          ↓
+Calculate MAE, RMSE, and R²
+          ↓
+Save charts and show dashboard results
 ```
 
-## Notebook Version
+The dashboard also offers a seasonal SARIMA path. It fits on the selected historical period and generates the requested number of future hourly predictions.
 
-A demo notebook is available in:
-- [notebooks/energy_forecasting_demo.ipynb](notebooks/energy_forecasting_demo.ipynb)
+---
 
-This notebook walks through:
-- dataset generation
-- data preprocessing
-- feature engineering
-- model training
-- plotting results
+## 📊 Data and Feature Engineering
 
-## Dashboard Version
+The synthetic generator creates hourly observations from **January 2023 through December 2025**. The data models demand patterns influenced by time of day, weekday, temperature, occupancy, peak periods, weekends, holidays, and random variation.
 
-The dashboard is available in:
-- [streamlit_app.py](streamlit_app.py)
+| Feature group | Examples |
+|---|---|
+| Timestamp/calendar | `timestamp`, `hour`, `day_of_week`, `month`, `day_of_year` |
+| Context | `temperature_c`, `occupancy_score`, `is_weekend`, `is_peak_hour`, `holiday_flag` |
+| Target | `energy_kwh` |
+| Historical demand | `lag_1`, `lag_2`, `lag_3`, `lag_6`, `lag_12`, `lag_24`, `lag_48`, `lag_72` |
+| Rolling demand | `rolling_3h`, `rolling_24h` |
 
-It provides a simple UI to view:
-- performance metrics
-- actual vs predicted trend
-- feature importance chart
-- historical demand and model forecast views
-- date/model/horizon filters with an apply action
-- a responsive KPI layout and a coordinated light theme configured in `.streamlit/config.toml`
-- scoped premium styling for the hero, metric cards, filter panel, and chart surfaces in `.streamlit/style.css`
+The dataset is synthetic and is intended to demonstrate a modeling pipeline. It should not be interpreted as measured utility or customer data.
 
-## Screenshots
+---
 
-The screenshots below show the dashboard, both forecasting approaches, data exploration, automated tests, API response, and project architecture.
+## 🤖 Forecasting Models
+
+### Random Forest
+
+The Random Forest regressor uses calendar, temperature, occupancy, lag, and rolling features. The training pipeline uses a reproducible train/test split and reports:
+
+- **MAE** — mean absolute prediction error
+- **RMSE** — root mean squared prediction error
+- **R²** — coefficient of determination
+
+### SARIMA
+
+The dashboard includes SARIMA for seasonal hourly forecasting, using a 24-step seasonal period to represent daily patterns. The dashboard lets the user choose the historical date window and forecast horizon.
+
+### Flask API MLP
+
+The API is a separate demo model with a simple input contract:
+
+```text
+hour: integer from 0 to 23
+day:  integer from 0 (Monday) to 6 (Sunday)
+```
+
+It returns a `predicted_energy_kwh` value. This API model is a small baseline and uses fewer inputs than the dashboard forecasting pipeline.
+
+---
+
+## 💻 Software and Tools
+
+- **Language:** Python
+- **Data processing:** Pandas, NumPy
+- **Machine learning:** Scikit-learn
+- **Time-series forecasting:** Statsmodels
+- **Dashboard:** Streamlit, Altair
+- **API:** Flask
+- **Testing:** Pytest
+- **Visualization:** Matplotlib, Altair
+- **Notebooks:** Jupyter
+- **Version control:** Git and GitHub
+
+---
+
+## 📸 Project Screenshots
 
 ### Dashboard
 
@@ -266,7 +194,7 @@ The screenshots below show the dashboard, both forecasting approaches, data expl
   </tr>
 </table>
 
-### SARIMA forecast
+### SARIMA forecast and data exploration
 
 <table>
   <tr>
@@ -292,57 +220,224 @@ The screenshots below show the dashboard, both forecasting approaches, data expl
   </tr>
 </table>
 
-## GitHub Portfolio Value
+---
 
-This project is suitable for:
-- internships
-- job portfolios
-- data science showcases
-- machine learning and AI discussions
-- energy analytics presentations
+## 📁 Project Structure
 
-It is beginner-friendly, but still demonstrates real-world project thinking.
+```text
+AI-Energy-Forecasting/
+├── .streamlit/                 # Dashboard theme and styling
+├── data/                       # Synthetic hourly energy dataset
+├── docs/                       # Architecture and interview notes
+├── images/                     # Dataset and analysis visuals
+├── models/                     # Locally generated model artifacts
+├── notebooks/                  # Forecasting and LSTM notebooks
+├── outputs/                    # Generated evaluation visualizations
+├── screenshots/                # README and portfolio screenshots
+├── scripts/                    # Demo asset-generation utilities
+├── src/                        # Data, feature, and model modules
+├── tests/                      # Pytest suite
+├── api.py                      # Flask prediction API
+├── main.py                     # Training and evaluation workflow
+├── streamlit_app.py            # Interactive forecasting dashboard
+├── train_api_model.py          # Train the API's MLP model
+└── requirements.txt             # Python dependencies
+```
 
-## Future Improvements
+---
 
-Possible next extensions:
-- LSTM or GRU deep learning model
-- weather-aware demand forecasting
-- real CSV dataset integration
-- production hardening of the local Flask API
-- cloud-hosted dashboard
+## 🧪 Testing
 
-## Advanced Forecasting Option
+Run the automated tests from the repository root:
 
-This project includes a seasonal forecasting path using SARIMA for time-series trends and a Random Forest baseline for tabular learning. The advanced version is implemented in:
-- [src/arima_model.py](src/arima_model.py)
+```bash
+python -m pytest -v
+```
 
-A deep-learning extension is also included as a notebook:
-- [notebooks/lstm_energy_forecasting.ipynb](notebooks/lstm_energy_forecasting.ipynb)
+The current suite contains **10 tests** covering successful API predictions, invalid API inputs, data cleaning, and feature engineering.
 
-For screenshots and portfolio-ready visuals, run:
+---
+
+## ▶️ How to Run
+
+### 1. Create and activate a virtual environment
+
+Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+macOS/Linux:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 2. Install dependencies
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### 3. Run the training workflow
+
+```bash
+python main.py
+```
+
+The workflow generates the synthetic CSV if it is missing, trains and evaluates the Random Forest model, saves its model artifact locally, and writes visualizations to `outputs/`.
+
+### 4. Launch the dashboard
+
+```bash
+streamlit run streamlit_app.py
+```
+
+Open the local URL printed by Streamlit. Use the sidebar to choose the forecasting model, date range, and forecast horizon.
+
+### 5. Run the Flask prediction API
+
+Train the API model, then start the local API:
+
+```bash
+python train_api_model.py
+python api.py
+```
+
+Send a sample request from Windows PowerShell:
+
+```powershell
+Invoke-RestMethod -Uri http://127.0.0.1:5000/predict -Method Post `
+  -ContentType "application/json" -Body '{"hour":14,"day":2}'
+```
+
+The API accepts a JSON object with integer `hour` and `day` values and returns `predicted_energy_kwh`. It is a local demonstration service, not a production API.
+
+---
+
+## 📈 Example Results
+
+One recorded Random Forest evaluation on the synthetic dataset:
+
+```text
+MAE:      9.50 kWh
+RMSE:    12.12 kWh
+R²:       0.9775
+```
+
+Results depend on the dataset and training environment. These example metrics are not a guarantee of accuracy on real-world energy data.
+
+---
+
+## 📓 Notebooks and Documentation
+
+- [Forecasting demo notebook](notebooks/energy_forecasting_demo.ipynb)
+- [LSTM forecasting notebook](notebooks/lstm_energy_forecasting.ipynb)
+- [Architecture notes](docs/architecture.md)
+- [Interview questions and answers](docs/interview_qa.md)
+- [Portfolio summary](PORTFOLIO.md)
+
+Generate supplementary dataset preview and analysis images with:
+
 ```bash
 python scripts/generate_demo_assets.py
 ```
 
-This will save files such as:
-- `images/dataset_preview.png`
-- `images/daily_energy_trend.png`
-- `images/energy_distribution.png`
+---
 
-## Portfolio Page
+## 🌐 Applications
 
-For a final GitHub-facing project summary and presentation layout, see:
-- [PORTFOLIO.md](PORTFOLIO.md)
+The concepts demonstrated here can inform:
 
-## Summary
+- Building and campus demand planning
+- Energy-consumption analysis
+- Peak-demand awareness
+- Smart-building prototypes
+- Educational forecasting projects
+- Renewable-energy planning experiments
 
-This project demonstrates how AI can be used to forecast energy consumption with practical business value. It is a strong student-friendly portfolio project because it combines machine learning, forecasting, analytics, and real-world energy decision-making.
+These are potential applications of the techniques; the project itself operates on synthetic data.
 
-## Project Goal
+---
 
-Forecast electricity usage in homes, buildings, and industries using AI to support smart cities, climate tech, and sustainable energy planning.
+## ⚠️ Limitations
 
-## License
+- The provided energy dataset is synthetic, not a real utility dataset.
+- Results may differ when data, dependencies, or model parameters change.
+- The simple Flask API model uses only hour and weekday inputs.
+- The API is intended for local demonstration and has not been production-hardened.
+- The dashboard is a prototype and is not designed for live grid operations.
+- The LSTM example is provided as a notebook, separate from the dashboard workflow.
 
-This project is intended for learning and portfolio use.
+---
+
+## 🚀 Future Improvements
+
+- Evaluate against a documented real-world energy dataset.
+- Add weather-aware features and external data sources.
+- Compare more forecasting models and validation strategies.
+- Add forecast uncertainty intervals and richer error analysis.
+- Improve API deployment, monitoring, and security for a production context.
+- Deploy the dashboard to a suitable hosting platform.
+
+---
+
+## 🎓 Skills Demonstrated
+
+### Data and machine learning
+
+- Time-series data preparation
+- Feature engineering
+- Regression modeling
+- Model evaluation with MAE, RMSE, and R²
+- Seasonal forecasting
+
+### Application development
+
+- Interactive Streamlit dashboards
+- Flask JSON API design and input validation
+- Python project organization
+- Automated testing with pytest
+
+### Communication and tooling
+
+- Data visualization
+- Technical documentation
+- Jupyter notebooks
+- Git and GitHub workflow
+
+---
+
+## 🔬 Project Status
+
+### ✅ Functional learning and portfolio demo
+
+The repository includes a synthetic-data forecasting workflow, Random Forest and SARIMA paths, an interactive dashboard, a local Flask API example, notebooks, and automated tests.
+
+> It is not validated for operational decisions using real grid data.
+
+---
+
+## ⭐ Conclusion
+
+This project brings together data preparation, feature engineering, forecasting, evaluation, visualization, and lightweight application interfaces in one reproducible learning workflow. It illustrates how energy-demand analytics can be explored while clearly distinguishing synthetic demonstration results from real-world operational forecasting.
+
+---
+
+## ⭐ Project Highlights
+
+```text
+Hourly Synthetic Energy Data
+Random Forest Evaluation
+SARIMA Seasonal Forecasting
+MAE / RMSE / R² Metrics
+Interactive Streamlit Dashboard
+Flask Prediction API
+Pytest Automated Tests
+Jupyter Forecasting Notebooks
+Data Visualizations
+GitHub Portfolio Screenshots
+```
