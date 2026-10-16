@@ -8,15 +8,23 @@ from flask import Flask, jsonify, request
 MODEL_PATH = Path(__file__).resolve().parent / "models" / "energy_api_mlp.pkl"
 
 
+def load_model():
+    if not MODEL_PATH.exists():
+        raise FileNotFoundError(
+            f"API model not found at {MODEL_PATH}. Run `python train_api_model.py` first."
+        )
+    return joblib.load(MODEL_PATH)
+
+
 def create_app(model=None):
     app = Flask(__name__)
+    model_instance = model
 
-    if model is None:
-        if not MODEL_PATH.exists():
-            raise FileNotFoundError(
-                f"API model not found at {MODEL_PATH}. Run `python train_api_model.py` first."
-            )
-        model = joblib.load(MODEL_PATH)
+    def get_model():
+        nonlocal model_instance
+        if model_instance is None:
+            model_instance = load_model()
+        return model_instance
 
     @app.post("/predict")
     def predict():
@@ -32,7 +40,7 @@ def create_app(model=None):
             return jsonify({"error": "`day` must be an integer from 0 (Monday) to 6 (Sunday)."}), 400
 
         features = pd.DataFrame([{"hour": hour, "day": day}])
-        prediction = float(model.predict(features)[0])
+        prediction = float(get_model().predict(features)[0])
         return jsonify({"predicted_energy_kwh": prediction})
 
     return app
@@ -42,4 +50,5 @@ app = create_app()
 
 
 if __name__ == "__main__":
+    app = create_app(model=load_model())
     app.run(host="127.0.0.1", port=5000, debug=False)

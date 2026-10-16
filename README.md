@@ -160,6 +160,14 @@ python main.py
 streamlit run streamlit_app.py
 ```
 
+### Run tests
+
+Install project dependencies, then run the automated tests from the repository root:
+
+```bash
+python -m pytest -v
+```
+
 ### Flask prediction API
 
 The API uses a separate, small MLP model with `hour` and weekday (`day`) as inputs. Train and save that model first:
@@ -227,6 +235,62 @@ It provides a simple UI to view:
 - date/model/horizon filters with an apply action
 - a responsive KPI layout and a coordinated light theme configured in `.streamlit/config.toml`
 - scoped premium styling for the hero, metric cards, filter panel, and chart surfaces in `.streamlit/style.css`
+
+## Screenshots
+
+The screenshots below show the dashboard, both forecasting approaches, data exploration, automated tests, API response, and project architecture.
+
+### Dashboard
+
+<table>
+  <tr>
+    <td align="center"><strong>Dashboard overview</strong><br><img src="screenshots/01_dashboard_overview.png" alt="Energy demand dashboard overview" width="480"></td>
+    <td align="center"><strong>Demand overview</strong><br><img src="screenshots/02_demand_overview.png" alt="Demand trend, KPIs, and period summary" width="480"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Period summary</strong><br><img src="screenshots/03_period_summary.png" alt="Selected-period demand chart and summary statistics" width="480"></td>
+    <td align="center"><strong>Forecast controls</strong><br><img src="screenshots/04_forecast_controls.png" alt="Dashboard model, date, and forecast-horizon controls" width="480"></td>
+  </tr>
+</table>
+
+### Random Forest evaluation
+
+<table>
+  <tr>
+    <td align="center"><strong>Evaluation metrics</strong><br><img src="screenshots/05_random_forest_metrics.png" alt="Random Forest MAE, RMSE, and R-squared metrics" width="480"></td>
+    <td align="center"><strong>Actual vs. predicted</strong><br><img src="screenshots/06_actual_vs_predicted.png" alt="Random Forest actual and predicted energy demand" width="480"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Feature importance</strong><br><img src="screenshots/07_feature_importance.png" alt="Random Forest feature importance chart" width="480"></td>
+    <td></td>
+  </tr>
+</table>
+
+### SARIMA forecast
+
+<table>
+  <tr>
+    <td align="center"><strong>Forecast overview</strong><br><img src="screenshots/08_sarima_overview.png" alt="SARIMA forecast summary metrics" width="480"></td>
+    <td align="center"><strong>Seasonal demand forecast</strong><br><img src="screenshots/09_sarima_chart.png" alt="Historical demand and SARIMA forecast chart" width="480"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Forecast schedule</strong><br><img src="screenshots/10_forecast_schedule.png" alt="SARIMA forecast timestamps and demand values" width="480"></td>
+    <td align="center"><strong>Source data</strong><br><img src="screenshots/11_source_data.png" alt="Dashboard source-data table and download action" width="480"></td>
+  </tr>
+</table>
+
+### Tests, API, and architecture
+
+<table>
+  <tr>
+    <td align="center"><strong>Automated tests</strong><br><img src="screenshots/12_tests_passing.png" alt="Pytest run with all 10 tests passing" width="480"></td>
+    <td align="center"><strong>Prediction API</strong><br><img src="screenshots/13_api_prediction.png" alt="Successful energy prediction API request and response" width="480"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Project architecture</strong><br><img src="screenshots/14_project_architecture.png" alt="Project system flow and key modules" width="480"></td>
+    <td></td>
+  </tr>
+</table>
 
 ## GitHub Portfolio Value
 
