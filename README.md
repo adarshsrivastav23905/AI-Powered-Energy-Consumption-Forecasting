@@ -24,7 +24,7 @@ The project includes two forecasting approaches:
 A Streamlit dashboard provides historical demand summaries, model evaluation, future forecasts, and selected-data download. A separate Flask API demonstrates a small MLP prediction model using hour and weekday inputs.
 
 > **Project note:** The included dataset is synthetic. This project is a learning and decision-support demo, not a live grid-operations system.
-
+   
 ---
 
 ## 🎯 Objectives
